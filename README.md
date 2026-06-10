@@ -1,4 +1,4 @@
-﻿<div align="center">
+﻿<div align="left">
 
 <img src="https://www.indi-an.com//wp-content/uploads/2026/03/PLCcom_720.png" width="210" alt="PLCcom Logo">
 
@@ -149,5 +149,6 @@ The examples are written for learning, integration tests, and manual validation.
 ## ™️ Trademark Information
 
 All product names, company names, and trademarks referenced in this repository are trademarks or registered trademarks of their respective owners. Their use is solely for identification and interoperability documentation.
+
 
 
