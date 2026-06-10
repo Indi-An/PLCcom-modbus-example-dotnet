@@ -1,0 +1,495 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="btnClose_Text" xml:space="preserve">
+    <value>Fenster schliessen</value>
+  </data>
+  <data name="btnCertificateManager_Text" xml:space="preserve">
+    <value>zeige&#xD;&#xA;Zertifikate</value>
+  </data>
+  <data name="btnCertificateManager_ToolTip_Text" xml:space="preserve">
+    <value>SecureTCP-Zertifikatsmanager öffnen.</value>
+  </data>
+  <data name="btnCertificateManager_RejectedToolTip_Text" xml:space="preserve">
+    <value>{0} abgelehnte SecureTCP-Zertifikat(e) müssen geprüft werden.</value>
+  </data>
+  <data name="btnreadBCD_Text" xml:space="preserve">
+    <value>lese BCD</value>
+  </data>
+  <data name="btnreadBit_Text" xml:space="preserve">
+    <value>lese Bit</value>
+  </data>
+  <data name="btnreadDouble_Text" xml:space="preserve">
+    <value>lese Double</value>
+  </data>
+  <data name="btnReadBytes_Text" xml:space="preserve">
+    <value>lese Byte</value>
+  </data>
+  <data name="btnReadCollection_Text" xml:space="preserve">
+    <value>lese Collection</value>
+  </data>
+  <data name="btnreadDInt_Text" xml:space="preserve">
+    <value>lese Integer</value>
+  </data>
+  <data name="btnreadDT_Text" xml:space="preserve">
+    <value>lese Datetime</value>
+  </data>
+  <data name="btnreadDWORD_Text" xml:space="preserve">
+    <value>lese UInteger</value>
+  </data>
+  <data name="btnReadExample_Text" xml:space="preserve">
+    <value>Lesefunktionen</value>
+  </data>
+  <data name="btnreadInt_Text" xml:space="preserve">
+    <value>lese Short</value>
+  </data>
+  <data name="btnreadFloat_Text" xml:space="preserve">
+    <value>lese Float</value>
+  </data>
+  <data name="btnreadString_Text" xml:space="preserve">
+    <value>lese String</value>
+  </data>
+  <data name="btnreadWord_Text" xml:space="preserve">
+    <value>lese UShort</value>
+  </data>
+  <data name="btnwriteBCD_Text" xml:space="preserve">
+    <value>schreibe BCD</value>
+  </data>
+  <data name="btnwriteBit_Text" xml:space="preserve">
+    <value>schreibe Bit</value>
+  </data>
+  <data name="btnwriteBuffer_Text" xml:space="preserve">
+    <value>schreibe Double</value>
+  </data>
+  <data name="btnwriteByte_Text" xml:space="preserve">
+    <value>schreibe Byte</value>
+  </data>
+  <data name="btnwriteDInt_Text" xml:space="preserve">
+    <value>schreibe Integer</value>
+  </data>
+  <data name="btnwriteDWord_Text" xml:space="preserve">
+    <value>schreibe UInteger</value>
+  </data>
+  <data name="btnWriteExample_Text" xml:space="preserve">
+    <value>Schreibefunktionen</value>
+  </data>
+  <data name="btnwriteInt_Text" xml:space="preserve">
+    <value>schreibe Short</value>
+  </data>
+  <data name="btnwriteFloat_Text" xml:space="preserve">
+    <value>schreibe Float</value>
+  </data>
+  <data name="btnwriteString_Text" xml:space="preserve">
+    <value>schreibe String</value>
+  </data>
+  <data name="btnwriteWord_Text" xml:space="preserve">
+    <value>schreibe UShort</value>
+  </data>
+  <data name="main_Text" xml:space="preserve">
+    <value>Beispielanwendung ModBus Master</value>
+  </data>
+  <data name="txtWarning_Text" xml:space="preserve">
+    <value>Dieses Beispielprogramm dient Ihnen zur Anschauung, welche Funktionen Ihnen mit PLCcom für Modbus zur Verfügung gestellt werden. Außerdem bietet es einfache Programmierbeispiele, zum schnellen Verstehen der Programm-Schnittstelle.
+
+Warnung: 
+Mit dem Produkt PLCcomModbus.Core und auch mit diesem Beispielcode werden Sie oder Dritte in die Lage versetzt nach eigenem Ermessen Anlagen, Maschinen oder Ähnliches zu überwachen und zu steuern. Es wird dem Anwender ermöglicht direkt Änderungen an einer verbundenen SPS durchzuführen. Hierzu muss der Benutzer eigenes Wissen bzw. diverse Tätigkeiten einfließen lassen. Hierdurch könnten z.B. bewegliche Teile an Maschinen ohne Vorwarnung anlaufen. 
+Schwere Verletzungen bis hin zum Tode sind möglich.
+Deshalb:  Stellen Sie deshalb unbedingt sicher, dass durch Ihre Arbeiten niemand in Gefahr gerät!
+Führen Sie nur Aktionen durch, bei denen Sie genau wissen was Sie tun. 
+Beachten Sie auch die Sicherheitshinweise in der EULA.</value>
+  </data>
+  <data name="btnRestore_Block_Text" xml:space="preserve">
+    <value>schreibe Block</value>
+  </data>
+  <data name="connect_unsuccessful" xml:space="preserve">
+    <value>Verbindung nicht erfolgreich! </value>
+  </data>
+  <data name="Continue_Question" xml:space="preserve">
+    <value>Wollen Sie fortfahren?</value>
+  </data>
+  <data name="Continue_Warning_Write" xml:space="preserve">
+    <value>Wichtig: Wenn Sie fortfahren wird die abgegebene Addresse beschrieben. Existierende Daten werden ohne weitere Nachfrage überschrieben!</value>
+  </data>
+  <data name="Important_question" xml:space="preserve">
+    <value>Achtung</value>
+  </data>
+  <data name="Message" xml:space="preserve">
+    <value>Meldung</value>
+  </data>
+  <data name="MessageText" xml:space="preserve">
+    <value>Meldung: </value>
+  </data>
+  <data name="Message_ReadCollection" xml:space="preserve">
+    <value>Hierbei handelt es sich um ein Codebeispiel! Bevor Sie die Funktion'Lesen Collection' verwenden, müssen Sie den markierten Bereich (Bearbeiten Collection) im Code-Bereich konfigurieren!</value>
+  </data>
+  <data name="operation_aborted" xml:space="preserve">
+    <value>Funktion abgebrochen</value>
+  </data>
+  <data name="ParseError" xml:space="preserve">
+    <value>Fehler beim Parsen aufgetreten! Valuestring ist ungültig!</value>
+  </data>
+  <data name="Timestamp" xml:space="preserve">
+    <value>Zeitstempel</value>
+  </data>
+  <data name="undefinend_Connectiontype" xml:space="preserve">
+    <value>undefinierter Verbindungstyp</value>
+  </data>
+  <data name="undefinend_PLCType" xml:space="preserve">
+    <value>undefinierter SPS-Typ</value>
+  </data>
+  <data name="btnSaveSettings_Text" xml:space="preserve">
+    <value>speichern</value>
+  </data>
+  <data name="successfully_saved" xml:space="preserve">
+    <value>Einstellungen erfolgreich gespeichert!</value>
+  </data>
+  <data name="State_closed" xml:space="preserve">
+    <value>Getrennt</value>
+  </data>
+  <data name="State_closing" xml:space="preserve">
+    <value>Verbindungstrennung...</value>
+  </data>
+  <data name="State_connected" xml:space="preserve">
+    <value>Verbunden</value>
+  </data>
+  <data name="State_connecting" xml:space="preserve">
+    <value>Verbindungsaufbau...</value>
+  </data>
+  <data name="btnNext_Text" xml:space="preserve">
+    <value>weiter</value>
+  </data>
+  <data name="State_open" xml:space="preserve">
+    <value>Port offen</value>
+  </data>
+  <data name="State_opening" xml:space="preserve">
+    <value>Port wird geöffnet...</value>
+  </data>
+  <data name="btnEditConnectionSettings_Text" xml:space="preserve">
+    <value>Einstellung ändern</value>
+  </data>
+  <data name="btnOtherFunctions_Text" xml:space="preserve">
+    <value>weitere Funktionen</value>
+  </data>
+  <data name="btnSaveConnectionSettings_Text" xml:space="preserve">
+    <value>Einstellung speichern</value>
+  </data>
+  <data name="grbFunctions_Text" xml:space="preserve">
+    <value>Funktionsvorauswahl</value>
+  </data>
+  <data name="lblConnectionType_Text" xml:space="preserve">
+    <value>Verbindungstyp</value>
+  </data>
+  <data name="lblInputboxBoolHint_Text" xml:space="preserve">
+    <value>Bitte geben Sie die Werte ein (True oder False):</value>
+  </data>
+  <data name="lblMultipleValues_Text" xml:space="preserve">
+    <value>Bitte geben Sie die Werte ein und schliessen mit Enter ab:</value>
+  </data>
+  <data name="lblSerialCode_Text" xml:space="preserve">
+    <value>Bitte geben Sie zuerst Ihren Serialcode ein =&gt;</value>
+  </data>
+  <data name="lblWriteMaskRegister_AND_Text" xml:space="preserve">
+    <value>Bitte geben Sie den AND-Wert im ushort Format ein:</value>
+  </data>
+  <data name="lblWriteMaskRegister_OR_Text" xml:space="preserve">
+    <value>Bitte geben Sie den OR-Wert im ushort Format ein:</value>
+  </data>
+  <data name="lblByteOrder_Text" xml:space="preserve">
+    <value>Byte Reihenfolge</value>
+  </data>
+  <data name="lblFunction_Text" xml:space="preserve">
+    <value>Funktion</value>
+  </data>
+  <data name="lblBroadcast_Text" xml:space="preserve">
+    <value>Broadcast, wenn vom Slave unterstützt</value>
+  </data>
+  <data name="lblmaxIdleTime_Text" xml:space="preserve">
+    <value>max. Ruhezeit bis zur Trennung</value>
+  </data>
+  <data name="btnMaskWriteRegister_Text" xml:space="preserve">
+    <value>mask write register</value>
+  </data>
+  <data name="btnReadWriteWord_Text" xml:space="preserve">
+    <value>lese/schreibe Register (UShort)</value>
+  </data>
+  <data name="btnwriteDouble_Text" xml:space="preserve">
+    <value>schreibe Double</value>
+  </data>
+  <data name="lblValues_Text" xml:space="preserve">
+    <value>Bitte geben Sie den gewünschten Wert ein:</value>
+  </data>
+  <data name="btnAddRequest_Text" xml:space="preserve">
+    <value>Requests hinzufügen</value>
+  </data>
+  <data name="btnExecute_Text" xml:space="preserve">
+    <value>Funktion ausführen</value>
+  </data>
+  <data name="btnLoadRequests_Text" xml:space="preserve">
+    <value>Lade Requests</value>
+  </data>
+  <data name="btnLoadRequest_Text" xml:space="preserve">
+    <value>Lade Request</value>
+  </data>
+  <data name="btnReadWriteModbus_Text" xml:space="preserve">
+    <value>lesen / schreiben</value>
+  </data>
+  <data name="btnRemoveRequest_Text" xml:space="preserve">
+    <value>Requests entfernen</value>
+  </data>
+  <data name="btnSaveRequests_Text" xml:space="preserve">
+    <value>Speichere Requests</value>
+  </data>
+  <data name="btnSaveRequest_Text" xml:space="preserve">
+    <value>Speichere Request</value>
+  </data>
+  <data name="btnSaveSlaveLogtoClipboard_Text" xml:space="preserve">
+    <value> Zwischen-ablage</value>
+  </data>
+  <data name="btnSaveSlaveLogtoFile_Text" xml:space="preserve">
+    <value>Speichere in Datei</value>
+  </data>
+  <data name="chkSingleValue_Text" xml:space="preserve">
+    <value>Einzelwert</value>
+  </data>
+  <data name="grbResult_Text" xml:space="preserve">
+    <value>Ergebnis</value>
+  </data>
+  <data name="grpAction_Text" xml:space="preserve">
+    <value>Aktion</value>
+  </data>
+  <data name="grpAddress_Text" xml:space="preserve">
+    <value>Read-Requests definieren</value>
+  </data>
+  <data name="lblDataType_Text" xml:space="preserve">
+    <value>Datentyp</value>
+  </data>
+  <data name="lblLog_Text" xml:space="preserve">
+    <value>Diagnose-Ausgabe</value>
+  </data>
+  <data name="lblQuantity_Text" xml:space="preserve">
+    <value>Anzahl</value>
+  </data>
+  <data name="lblReadAddress_Text" xml:space="preserve">
+    <value>Leseadresse</value>
+  </data>
+  <data name="lblWriteAddress_Text" xml:space="preserve">
+    <value>Schreibadresse</value>
+  </data>
+  <data name="txtInfoOF_Text" xml:space="preserve">
+    <value>In diesem Fenster können spezielle Modbusfunktionen getestet werden wenn sie vom Modbus-Slave unterstützt werden.</value>
+  </data>
+  <data name="txtInfoRB_OR_Text" xml:space="preserve">
+    <value>In diesem Fenster können einzelne Lese- oder Schreibvorgänge durchgeführt werden. Für optimierte Lesevorgänge benutzen Sie bitte die ReadCollection.</value>
+  </data>
+  <data name="txtInfoRCB_Text" xml:space="preserve">
+    <value>Bei der ReadCollection werden Lese-Vorgänge logisch optimiert, sodass nur die minimal notwendigen Zugriffe auf den Modbus erfolgen.</value>
+  </data>
+  <data name="lblSlaveID_Text" xml:space="preserve">
+    <value>Slave ID</value>
+  </data>
+  <data name="successfully_loaded" xml:space="preserve">
+    <value>Einstellungen erfolgreich geladen!</value>
+  </data>
+  <data name="wrong_function" xml:space="preserve">
+    <value>Operation mit gewählter Modbus-Funktion nicht möglich!</value>
+  </data>
+  <data name="lblRegisterMode_Text" xml:space="preserve">
+    <value>Register-Mode</value>
+  </data>
+  <data name="lblLanguage_Text" xml:space="preserve">
+    <value>UI-Sprache</value>
+  </data>
+  <data name="to_many_windows" xml:space="preserve">
+    <value>Zuviele Fenster offen! Bitte schliessen Sie zuerst alle untergeordneten Fenster!</value>
+  </data>
+  <data name="lblNetworkAddressFamily_Text" xml:space="preserve">
+    <value>Netzwerk Adress Familie (IPv4 IPv6)</value>
+  </data>
+  <data name="wrong_datatype" xml:space="preserve">
+    <value>unbekannter Datentyp</value>
+  </data>
+  <data name="wrong_datatype_byte" xml:space="preserve">
+    <value>Schreiben von 8-Bit Werten nicht möglich</value>
+  </data>
+  <data name="CertificateManagerForm_Text" xml:space="preserve"><value>SecureTCP Zertifikatsmanager</value></data>
+  <data name="CertificateManager_Title_Text" xml:space="preserve"><value>SecureTCP PKI-Speicher</value></data>
+  <data name="CertificateManager_Loading_Text" xml:space="preserve"><value>Lade Zertifikate...</value></data>
+  <data name="CertificateManager_ColumnStore_Text" xml:space="preserve"><value>Speicher</value></data>
+  <data name="CertificateManager_ColumnStatus_Text" xml:space="preserve"><value>Status</value></data>
+  <data name="CertificateManager_ColumnFile_Text" xml:space="preserve"><value>Datei</value></data>
+  <data name="CertificateManager_ColumnSubject_Text" xml:space="preserve"><value>Subjekt</value></data>
+  <data name="CertificateManager_ColumnIssuer_Text" xml:space="preserve"><value>Aussteller</value></data>
+  <data name="CertificateManager_ColumnValidTo_Text" xml:space="preserve"><value>Gültig bis</value></data>
+  <data name="CertificateManager_ColumnRole_Text" xml:space="preserve"><value>Rolle</value></data>
+  <data name="CertificateManager_MenuTrust_Text" xml:space="preserve"><value>Zertifikat vertrauen</value></data>
+  <data name="CertificateManager_MenuTrustIssuer_Text" xml:space="preserve"><value>Als Aussteller vertrauen</value></data>
+  <data name="CertificateManager_MenuReject_Text" xml:space="preserve"><value>Zertifikat ablehnen</value></data>
+  <data name="CertificateManager_MenuDelete_Text" xml:space="preserve"><value>Datei löschen</value></data>
+  <data name="CertificateManager_MenuOpenFolder_Text" xml:space="preserve"><value>Ordner öffnen</value></data>
+  <data name="CertificateManager_MenuCopyThumbprint_Text" xml:space="preserve"><value>Fingerabdruck kopieren</value></data>
+  <data name="CertificateManager_MenuRefresh_Text" xml:space="preserve"><value>Aktualisieren</value></data>
+  <data name="CertificateManager_DetailsGroup_Text" xml:space="preserve"><value>Zertifikatsdetails</value></data>
+  <data name="CertificateManager_ButtonOwn_Text" xml:space="preserve"><value>Eigenes</value></data>
+  <data name="CertificateManager_ButtonOpenPki_Text" xml:space="preserve"><value>PKI</value></data>
+  <data name="CertificateManager_ButtonRefresh_Text" xml:space="preserve"><value>Neu&#xD;&#xA;laden</value></data>
+  <data name="CertificateManager_ButtonTrust_Text" xml:space="preserve"><value>Vertrauen</value></data>
+  <data name="CertificateManager_ButtonIssuer_Text" xml:space="preserve"><value>Aussteller</value></data>
+  <data name="CertificateManager_ButtonReject_Text" xml:space="preserve"><value>Ablehnen</value></data>
+  <data name="CertificateManager_ButtonDelete_Text" xml:space="preserve"><value>Löschen</value></data>
+  <data name="CertificateManager_ButtonClose_Text" xml:space="preserve"><value>Fenster&#xD;&#xA;schließen</value></data>
+  <data name="CertificateManager_ButtonOwn_ToolTip" xml:space="preserve"><value>Eigenes SecureTCP-Zertifikat erstellen oder laden.</value></data>
+  <data name="CertificateManager_ButtonOpenPki_ToolTip" xml:space="preserve"><value>SecureTCP-PKI-Ordner öffnen.</value></data>
+  <data name="CertificateManager_ButtonRefresh_ToolTip" xml:space="preserve"><value>Zertifikatsliste aktualisieren.</value></data>
+  <data name="CertificateManager_ButtonTrust_ToolTip" xml:space="preserve"><value>Ausgewähltes abgelehntes Zertifikat nach vertrauenswürdig verschieben.</value></data>
+  <data name="CertificateManager_ButtonIssuer_ToolTip" xml:space="preserve"><value>Ausgewähltes Zertifikat zu den Ausstellern verschieben.</value></data>
+  <data name="CertificateManager_ButtonReject_ToolTip" xml:space="preserve"><value>Ausgewähltes Zertifikat nach abgelehnt verschieben.</value></data>
+  <data name="CertificateManager_ButtonDelete_ToolTip" xml:space="preserve"><value>Ausgewählte Zertifikatsdatei löschen.</value></data>
+  <data name="CertificateManager_ButtonClose_ToolTip" xml:space="preserve"><value>Fenster schließen.</value></data>
+  <data name="CertificateManager_StoreOwn_Text" xml:space="preserve"><value>Eigen</value></data>
+  <data name="CertificateManager_StoreTrusted_Text" xml:space="preserve"><value>Vertraut</value></data>
+  <data name="CertificateManager_StoreIssuers_Text" xml:space="preserve"><value>Aussteller</value></data>
+  <data name="CertificateManager_StoreRejected_Text" xml:space="preserve"><value>Abgelehnt</value></data>
+  <data name="CertificateManager_StatusLoadError_Text" xml:space="preserve"><value>Ladefehler</value></data>
+  <data name="CertificateManager_StatusNotYetValid_Text" xml:space="preserve"><value>Noch nicht gültig</value></data>
+  <data name="CertificateManager_StatusExpired_Text" xml:space="preserve"><value>Abgelaufen</value></data>
+  <data name="CertificateManager_StatusValid_Text" xml:space="preserve"><value>Gültig</value></data>
+  <data name="CertificateManager_StatusCounts_Text" xml:space="preserve"><value>Eigen: {0}    Vertraut: {1}    Aussteller: {2}    Abgelehnt: {3}</value></data>
+  <data name="CertificateManager_SelectCertificate_Text" xml:space="preserve"><value>Wählen Sie ein Zertifikat aus, um Details anzuzeigen. Über das Kontextmenü können Zertifikate vertraut, abgelehnt, gelöscht oder geprüft werden.</value></data>
+  <data name="CertificateManager_NotLoaded_Text" xml:space="preserve"><value>&lt;nicht geladen&gt;</value></data>
+  <data name="CertificateManager_None_Text" xml:space="preserve"><value>&lt;keine&gt;</value></data>
+  <data name="CertificateManager_Yes_Text" xml:space="preserve"><value>ja</value></data>
+  <data name="CertificateManager_No_Text" xml:space="preserve"><value>nein</value></data>
+  <data name="CertificateManager_DetailStore_Text" xml:space="preserve"><value>Speicher:</value></data>
+  <data name="CertificateManager_DetailStatus_Text" xml:space="preserve"><value>Status:</value></data>
+  <data name="CertificateManager_DetailFile_Text" xml:space="preserve"><value>Datei:</value></data>
+  <data name="CertificateManager_DetailLoadError_Text" xml:space="preserve"><value>Ladefehler:</value></data>
+  <data name="CertificateManager_DetailSubject_Text" xml:space="preserve"><value>Subjekt:</value></data>
+  <data name="CertificateManager_DetailIssuer_Text" xml:space="preserve"><value>Aussteller:</value></data>
+  <data name="CertificateManager_DetailThumbprint_Text" xml:space="preserve"><value>Fingerabdruck:</value></data>
+  <data name="CertificateManager_DetailSerial_Text" xml:space="preserve"><value>Seriennummer:</value></data>
+  <data name="CertificateManager_DetailValidFrom_Text" xml:space="preserve"><value>Gültig ab:</value></data>
+  <data name="CertificateManager_DetailValidTo_Text" xml:space="preserve"><value>Gültig bis:</value></data>
+  <data name="CertificateManager_DetailRole_Text" xml:space="preserve"><value>Rolle:</value></data>
+  <data name="CertificateManager_DetailPrivateKey_Text" xml:space="preserve"><value>Privater Schlüssel:</value></data>
+  <data name="CertificateManager_ErrorNoCertificate_Text" xml:space="preserve"><value>Die Datei enthält kein Zertifikat.</value></data>
+  <data name="CertificateManager_OwnCertificateAvailable_Text" xml:space="preserve"><value>Eigenes Zertifikat ist verfügbar:</value></data>
+  <data name="CertificateManager_CertificateMoved_Text" xml:space="preserve"><value>Zertifikat nach {0} verschoben.</value></data>
+  <data name="CertificateManager_DeleteQuestion_Text" xml:space="preserve"><value>Zertifikatsdatei löschen?</value></data>
+  <data name="CertificateManager_ErrorOutsidePki_Text" xml:space="preserve"><value>Datei außerhalb des PKI-Speichers wird nicht gelöscht:</value></data></root>
+

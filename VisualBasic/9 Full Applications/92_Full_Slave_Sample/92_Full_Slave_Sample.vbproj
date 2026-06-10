@@ -1,0 +1,47 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup Label="Globals">
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <StartupObject>PLCcomMB_Slave_Example_VB.My.MyApplication</StartupObject>
+    <RootNamespace>PLCcomMB_Slave_Example_VB</RootNamespace>
+    <AssemblyName>PLCcomMB_Slave_Example_VB</AssemblyName>
+    <MyType>WindowsForms</MyType>
+    <ApplicationIcon>pci_card_network.ico</ApplicationIcon>
+    <RuntimeIdentifiers>win;win-x86;win-x64</RuntimeIdentifiers>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
+    <Prefer32Bit>false</Prefer32Bit>
+    <OptionExplicit>On</OptionExplicit>
+    <OptionCompare>Binary</OptionCompare>
+    <OptionStrict>Off</OptionStrict>
+    <OptionInfer>On</OptionInfer>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,CA1416,SYSLIB0057</NoWarn>
+    <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Release_Demo' Or '$(Configuration)' == 'Demo_Release'">
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+  </PropertyGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Drawing" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Windows.Forms" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="PLCcomModbus" Version="9.1.5" />
+  </ItemGroup>
+</Project>
+

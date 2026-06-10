@@ -1,0 +1,229 @@
+// MIT License
+// Copyright (c) Indi.An GmbH
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+
+// ==============================================================================
+// PLCcom for Modbus - Workshop 22: SecureTCP Slave
+//
+// This workshop starts a Secure Modbus TCP slave. It creates an OPC UA-style PKI
+// store and installs a deliberately unsafe workshop validator that accepts every
+// remote client certificate so the SecureTCP mechanics can be tested immediately.
+//
+// Essentials:
+//   * Replace the license placeholders before running the sample.
+//   * Secure Modbus TCP uses port 802 by default.
+//   * Pair this workshop with Workshop 21 to see certificate validation callbacks.
+//   * Remove the accept-all validator assignment to test the normal PKI workflow.
+// ==============================================================================
+
+using System;
+using System.Net;
+using PLCcomModbus.Core;
+using PLCcomModbus.Core.Security;
+using PLCcomModbus.DataAdapter;
+using PLCcomModbus.Slave;
+
+namespace PLCcomModbus.Workshops.SecureTcp.SecureTcpSlave
+{
+    internal static class Program
+    {
+        // -- License ----------------------------------------------------------
+        // TODO: Replace with your PLCcom Modbus license credentials.
+        // Keep the placeholders visible so SDK users see where credentials enter.
+        private const string LicenseUserName = "<Enter your UserName here>";
+        private const string LicenseSerial = "<Enter your Serial here>";
+
+        private const string ListenerId = "securetcp";
+        private const int SecureTcpPort = SecureModbusTcpOptions.DefaultSecureModbusTcpPort;
+        private const byte SlaveId = 1;
+
+        private static void Main()
+        {
+            PrintHeader();
+
+            try
+            {
+                // -- Step 1: Prepare the SecureTCP listener policy ------------
+                // The listener refuses unknown clients until their certificate
+                // is trusted directly or through an issuer certificate.
+                SecureModbusTcpOptions options = CreateSecureTcpOptions();
+
+                using (ModbusSlave slave = new ModbusSlave(LicenseUserName, LicenseSerial, SlaveId))
+                {
+                    // -- Step 2: Enable basic diagnostics -------------------
+                    // The same events are useful for plain TCP and SecureTCP.
+                    // They show listener state changes and incoming telegrams.
+                    slave.OnPortStateChange += OnPortStateChange;
+                    slave.OnIncomingLogEntry += OnIncomingLogEntry;
+
+                    // -- Step 3: Prepare readable sample data --------------
+                    // Seed a few sample holding-register values so a master can
+                    // immediately read usable data after connect.
+                    slave.SetValue(0, eModbusRegion.HoldingRegister, (ushort)700);
+                    slave.SetValue(1, eModbusRegion.HoldingRegister, (ushort)701);
+                    slave.SetValue(2, eModbusRegion.HoldingRegister, (ushort)702);
+                    slave.SetValue(3, eModbusRegion.HoldingRegister, (ushort)703);
+
+                    // -- Step 4: Start the SecureTCP listener --------------
+                    // The listener name is an application-level key. Use it to
+                    // replace or remove this listener while the slave is running.
+                    slave.AddOrReplaceListener_SecureTCP(ListenerId, SecureTcpPort, options);
+
+                    Console.WriteLine("SecureTCP slave is listening on port {0}.", SecureTcpPort);
+                    Console.WriteLine("Start Workshop 21 in another console to connect as master.");
+                    Console.WriteLine("Press ENTER to stop.");
+                    // Stop is explicit to keep the TLS listener alive while testing.
+                    Console.ReadLine();
+
+                    slave.RemoveListener(ListenerId);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Workshop failed: " + ex.Message);
+                Console.WriteLine("Press ENTER to exit.");
+                Console.ReadLine();
+            }
+        }
+
+        private static SecureModbusTcpOptions CreateSecureTcpOptions()
+        {
+            // The slave-side PKI store is the operator workflow: unknown
+            // client certificates land in rejected/certs and must be reviewed.
+            // The folder structure is created automatically on first access.
+            SecureModbusPkiStore pkiStore = new SecureModbusPkiStore(@".\pki\securetcp-slave");
+            pkiStore.EnsureDirectories();
+            pkiStore.CertificateStored += OnCertificateStored;
+            PrintPkiStoreLayout(pkiStore);
+
+            SecureModbusOwnCertificate ownCertificate = new SecureModbusOwnCertificate(
+                pkiStore,
+                "PLCcom Modbus Workshop Slave",
+                "workshop-password",
+                3650,
+                "Indi.An GmbH",
+                new[] { "localhost" },
+                new[] { IPAddress.Parse("127.0.0.1") });
+
+            SecureModbusTcpOptions options = new SecureModbusTcpOptions();
+            options.PkiStore = pkiStore;
+            options.OwnCertificate = ownCertificate;
+
+            // PKI default behavior when RemoteCertificateValidator is NOT set:
+            //   * own/certs and own/private contain this slave's certificate
+            //     and private key. SecureModbusOwnCertificate creates them on
+            //     first use if no valid certificate exists yet.
+            //   * trusted/certs contains remote client certificates that are
+            //     trusted directly. They are accepted only while their validity
+            //     period is still OK.
+            //   * issuers/certs contains CA or issuer certificates. If a remote
+            //     client certificate chains to one of these issuers and the chain
+            //     is valid, PLCcom copies the leaf certificate to trusted/certs
+            //     and accepts the connection.
+            //   * rejected/certs receives unknown, expired or otherwise invalid
+            //     remote client certificates. The connection is rejected so an
+            //     operator can review and move trust material.
+            //
+            // Workshop-only override:
+            // Assigning RemoteCertificateValidator disables that automatic
+            // certificate-level PKI decision. This intentionally unsafe validator
+            // returns true for every client certificate so the user can see how
+            // the validator hook works without preparing trusted certificates.
+            options.RemoteCertificateValidator = new UnsafeAcceptAllCertificateValidator("SecureTCP client");
+
+            // Auto mode is suitable for first tests before stricter profile rules are required.
+            options.TlsProtocolMode = SecureModbusTlsProtocolMode.Auto;
+            return options;
+        }
+
+        private static void OnCertificateStored(object sender, SecureModbusPkiCertificateStoredEventArgs e)
+        {
+            Console.WriteLine("PKI {0}: {1}", e.StoreKind, e.FilePath);
+        }
+
+        private static void PrintPkiStoreLayout(SecureModbusPkiStore pkiStore)
+        {
+            Console.WriteLine("PKI store:");
+            Console.WriteLine("  own/certs      : {0}", pkiStore.OwnCertificatesPath);
+            Console.WriteLine("  own/private    : {0}", pkiStore.OwnPrivatePath);
+            Console.WriteLine("  trusted/certs  : {0}", pkiStore.TrustedCertificatesPath);
+            Console.WriteLine("  issuers/certs  : {0}", pkiStore.IssuerCertificatesPath);
+            Console.WriteLine("  rejected/certs : {0}", pkiStore.RejectedCertificatesPath);
+            Console.WriteLine();
+        }
+
+        // -- Certificate validation -----------------------------------------
+        // Deliberately insecure workshop validator. It is useful when the
+        // workshop should focus on SecureTCP mechanics and not on trust-store
+        // administration. Do not use this policy in production.
+        private sealed class UnsafeAcceptAllCertificateValidator : ISecureModbusCertificateValidator
+        {
+            private readonly string mRemoteEndpointName;
+
+            internal UnsafeAcceptAllCertificateValidator(string remoteEndpointName)
+            {
+                mRemoteEndpointName = remoteEndpointName;
+            }
+
+            public bool Validate(SecureModbusCertificateValidationContext context)
+            {
+                Console.WriteLine("WARNING: accepting every {0} certificate.", mRemoteEndpointName);
+                Console.WriteLine("         PKI trust checks are bypassed by this workshop validator.");
+                Console.WriteLine("         Remote chain length: {0}", context.RemoteCertificateChain.Length);
+
+                foreach (var certificate in context.RemoteCertificateChain)
+                    Console.WriteLine("         {0}", certificate.Subject);
+
+                return true;
+            }
+        }
+
+        private static void OnPortStateChange(object sender, eConnectionState state)
+        {
+            Console.WriteLine("Listener state: " + state);
+        }
+
+        private static void OnIncomingLogEntry(LogEntry[] entries)
+        {
+            foreach (LogEntry entry in entries)
+                Console.WriteLine(entry);
+        }
+
+        // -- Console output ---------------------------------------------------
+        private static void PrintHeader()
+        {
+            Console.WriteLine("╔══════════════════════════════════════════════════════════════════════╗");
+            Console.WriteLine("║ PLCcom for Modbus - Workshop 22: SecureTCP Slave                     ║");
+            Console.WriteLine("║                                                                      ║");
+            Console.WriteLine("║ Starts a Secure Modbus TCP slave with a PKI store and a local        ║");
+            Console.WriteLine("║ certificate.                                                         ║");
+            Console.WriteLine("║                                                                      ║");
+            Console.WriteLine("║ What you will learn:                                                 ║");
+            Console.WriteLine("║   * Create or load the slave own certificate                         ║");
+            Console.WriteLine("║   * Override client certificate validation with accept-all           ║");
+            Console.WriteLine("║   * Serve normal Modbus data through a TLS listener                  ║");
+            Console.WriteLine("║                                                                      ║");
+            Console.WriteLine("║ Used by Workshop 21 on SecureTCP port 802                            ║");
+            Console.WriteLine("╚══════════════════════════════════════════════════════════════════════╝");
+            Console.WriteLine();
+        }
+    }
+}
+

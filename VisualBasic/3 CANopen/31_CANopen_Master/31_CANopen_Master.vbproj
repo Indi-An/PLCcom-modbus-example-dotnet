@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup Label="Globals">
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <StartupObject>PLCComMB_CANopen_Master_VB.Program</StartupObject>
+    <RootNamespace>PLCComMB_CANopen_Master_VB</RootNamespace>
+    <AssemblyName>PLCComMB_CANopen_Master_VB</AssemblyName>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <Prefer32Bit>false</Prefer32Bit>
+    <OptionExplicit>On</OptionExplicit>
+    <OptionCompare>Binary</OptionCompare>
+    <OptionStrict>Off</OptionStrict>
+    <OptionInfer>On</OptionInfer>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="My Project\**\*.vb" />
+    <EmbeddedResource Remove="My Project\**\*.resx" />
+    <None Remove="My Project\**\*" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="PLCcomModbus" Version="9.1.5" />
+  </ItemGroup>
+</Project>
+
