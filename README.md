@@ -1,34 +1,38 @@
-﻿# PLCcom Modbus - .NET Workshops
+﻿<div align="center">
 
-<p align="left">
-  <img src="https://www.indi-an.com//wp-content/uploads/2026/03/PLCcom_720.png" width="200" alt="PLCcom Logo">
-</p>
+<img src="https://www.indi-an.com//wp-content/uploads/2026/03/PLCcom_720.png" width="210" alt="PLCcom Logo">
 
-<!--
-Optional repository image slot:
-Add your screenshot or overview graphic as assets/plccom-modbus-workshops.png and uncomment the next line.
+# PLCcom Modbus - .NET Workshops
+
+**Hands-on Modbus examples for C# and Visual Basic developers**
+
+[![.NET](https://img.shields.io/badge/.NET-10.0-512BD4?style=flat-square&logo=dotnet)](https://dotnet.microsoft.com/)
+[![Languages](https://img.shields.io/badge/Languages-C%23%20%7C%20VB.NET-239120?style=flat-square)](#-repository-layout)
+[![Modbus](https://img.shields.io/badge/Protocol-Modbus%20TCP%20%7C%20SecureTCP-blue?style=flat-square)](#-secure-modbus-tcp-and-the-pki-store)
+[![License](https://img.shields.io/badge/Examples-MIT-green?style=flat-square)](LICENSE)
+
+</div>
 
 ![PLCcom Modbus workshop overview](assets/plccom-modbus-workshops.png)
--->
 
-Modbus looks simple at first glance: a unit id, a function code, an address, a few registers. In real projects, the interesting work starts exactly around those details. Which byte order does the device expect? Which register width represents the value? How do you prove what was sent on the wire? What happens when the transport is secured with certificates instead of being plain TCP?
+Modbus looks simple at first glance: a unit id, a function code, an address, a few registers. In real projects, the interesting work starts exactly around those details. Which byte order does the device expect? Which register width represents the value? How do you prove what was sent on the wire? What changes when the same communication is protected with TLS and certificates?
 
-This repository is built around those questions. It is not a bag of unrelated snippets. It is a small workshop path for developers and integrators who want to learn PLCcom Modbus by running working pairs: start a slave, connect a master, watch the telegrams, change one thing, run it again.
+This repository is built around those questions. It is not a loose collection of snippets. It is a workshop path for developers and integrators who want to learn PLCcom Modbus by running working pairs: start a slave, connect a master, watch the telegrams, change one detail, run it again.
 
-The examples are intentionally close to the code you would write in a real integration. The small console workshops keep the moving parts visible. The full applications are richer manual validation tools for the day when a real device is on the desk and you need to see what is going on.
+The small console workshops keep the moving parts visible. The full applications are richer manual validation tools for the day when a real device is on the desk and you need to see what is going on.
 
-## What You Will Find Here
+## 🧭 What You Will Find Here
 
-| Area | What it teaches |
-|------|-----------------|
-| First Steps | Plain Modbus TCP with one master and one slave, including read and write requests. |
-| Secure Modbus TCP | TLS, PKI store layout, certificate trust, mutual TLS, and authorization callbacks. |
-| CANopen | CANopen-style object dictionary access through Modbus communication. |
-| Full Applications | Windows Forms master and slave applications for manual checks, troubleshooting, and validation. |
+| Area | What it teaches | Typical use |
+|------|-----------------|-------------|
+| **First Steps** | Plain Modbus TCP with one master and one slave. | Learn the basic request and response flow. |
+| **Secure Modbus TCP** | TLS, PKI store layout, certificate trust, mutual TLS, and authorization callbacks. | Understand secure transport before using it in a customer project. |
+| **CANopen** | CANopen-style object dictionary access through Modbus communication. | Work with devices that expose this access pattern. |
+| **Full Applications** | Windows Forms master and slave applications. | Manual checks, troubleshooting, certificate review, and field validation. |
 
-The C# and Visual Basic folders follow the same structure so that teams can compare both languages without learning two different repositories.
+The C# and Visual Basic folders follow the same structure so teams can compare both languages without learning two different repositories.
 
-## Repository Layout
+## 🗂️ Repository Layout
 
 ~~~text
 CSharp/
@@ -46,7 +50,7 @@ VisualBasic/
 
 Each workshop contains its own README and source file. Start with the README in the chapter folder, then open the numbered project.
 
-## Recommended Learning Path
+## 🚦 Recommended Learning Path
 
 | Step | Start here | Why |
 |------|------------|-----|
@@ -57,13 +61,13 @@ Each workshop contains its own README and source file. Start with the README in 
 | 5 | `24_RoleBasedAuthorization` | Learn where an integrator can decide whether a role may execute a function. |
 | 6 | `91_Full_Master_Sample` and `92_Full_Slave_Sample` | Move from small teaching code to full manual validation tools. |
 
-## NuGet Package
+## 📦 NuGet Package
 
-The projects reference the **PLCcomModbus** package from the PLCcom Modbus **9.x** line. The exact package version is pinned in the project files so that the samples build reproducibly.
+The projects reference the **PLCcomModbus** package from the PLCcom Modbus **9.x** line. The exact package version is pinned in the project files so the samples build reproducibly.
 
 If the required package is not yet available on nuget.org, add the package source provided with your PLCcom Modbus build or wait until the matching 9.x package has been published.
 
-## Requirements
+## 🧰 Requirements
 
 - Windows 10/11 or Windows Server for the full Windows Forms applications
 - .NET 10 SDK
@@ -71,7 +75,7 @@ If the required package is not yet available on nuget.org, add the package sourc
 - A valid PLCcom Modbus license user name and serial number
 - A Modbus device, simulator, or one of the included slave workshops
 
-## Getting Started
+## 🚀 Getting Started
 
 1. Clone the repository.
 2. Open `PLCcom_Modbus_Examples.sln` in Visual Studio.
@@ -86,7 +90,7 @@ dotnet restore .\PLCcom_Modbus_Examples.sln
 dotnet build .\PLCcom_Modbus_Examples.sln -c Debug
 ~~~
 
-## Workshop Map
+## 🧪 Workshop Map
 
 ### C# Workshops
 
@@ -106,7 +110,7 @@ dotnet build .\PLCcom_Modbus_Examples.sln -c Debug
 
 The Visual Basic projects mirror the same workshop numbers and topics. Use them when your integration codebase is VB.NET or when you want to compare both language styles side by side.
 
-## Secure Modbus TCP and the PKI Store
+## 🔐 Secure Modbus TCP and the PKI Store
 
 SecureTCP uses TLS certificates. PLCcom creates the PKI store structure on first access when it does not exist yet. The important folders are:
 
@@ -122,13 +126,13 @@ Without a custom validator, PLCcom performs certificate validation against this 
 
 Some workshops use a permissive validator on purpose. That is a teaching tool. It shows where your own policy can hook in, but it is not a security policy for production systems.
 
-## Full Applications
+## 🖥️ Full Applications
 
 The full master and slave applications are not decorative demos. They are meant for real manual validation: try plain TCP and SecureTCP, inspect logs, check byte order and register modes, review certificate handling, and compare the behaviour against an actual device or customer setup.
 
 When a console workshop feels too small for a field issue, the full applications are the next stop.
 
-## Licensing Information
+## 📄 Licensing Information
 
 **Examples License**
 
@@ -138,11 +142,11 @@ All example sources in this repository are released under the **MIT License**. Y
 
 The **PLCcom Modbus** library itself is proprietary software and is not part of the MIT license. To use the SDK in your own applications, you need a valid PLCcom Modbus license and must accept the applicable EULA.
 
-## Safety Notice
+## ⚠️ Safety Notice
 
 The examples are written for learning, integration tests, and manual validation. Do not use them unchanged in production, safety-critical, or industrial environments. Review addresses, write operations, timeouts, TLS settings, certificate trust, and authorization logic before connecting to real equipment.
 
-## Trademark Information
+## ™️ Trademark Information
 
 All product names, company names, and trademarks referenced in this repository are trademarks or registered trademarks of their respective owners. Their use is solely for identification and interoperability documentation.
 
