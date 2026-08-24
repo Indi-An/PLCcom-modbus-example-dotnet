@@ -1,4 +1,4 @@
-﻿# 21 SecureTCP Master
+# 21 SecureTCP Master
 
 Shows how a master connects through Secure Modbus TCP instead of plain TCP.
 
@@ -6,7 +6,7 @@ Shows how a master connects through Secure Modbus TCP instead of plain TCP.
 
 Run `22_SecureTCP_Slave` first or provide another SecureTCP endpoint.
 
-Replace the license placeholders before connecting to a PLCcom Modbus endpoint.
+Enter your license user name and serial before connecting to a PLCcom Modbus endpoint, or leave both fields blank to run for 15 minutes during a debug session.
 
 ## Run
 

@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup Label="Globals">
     <SccProjectName>SAK</SccProjectName>
     <SccProvider>SAK</SccProvider>
@@ -25,7 +25,7 @@
     <None Remove="My Project\**\*" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="PLCcomModbus" Version="9.1.5" />
+    <PackageReference Include="PLCcomModbus" Version="9.2.*" />
   </ItemGroup>
 </Project>
 

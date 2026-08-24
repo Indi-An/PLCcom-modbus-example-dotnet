@@ -1,4 +1,4 @@
-﻿# 12 Simple Slave TCP
+# 12 Simple Slave TCP
 
 Hosts a small VB.NET Modbus TCP slave for the master workshop.
 
@@ -6,7 +6,7 @@ Hosts a small VB.NET Modbus TCP slave for the master workshop.
 
 Run this workshop before `11_Simple_Master_TCP`.
 
-Replace the license placeholders before connecting to a PLCcom Modbus endpoint.
+Enter your license user name and serial before connecting to a PLCcom Modbus endpoint, or leave both fields blank to run for 15 minutes during a debug session.
 
 ## Run
 

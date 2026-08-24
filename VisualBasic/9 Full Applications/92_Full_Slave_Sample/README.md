@@ -1,4 +1,4 @@
-﻿# 92 Full Slave Sample
+# 92 Full Slave Sample
 
 A full VB.NET Windows Forms slave application with configurable listener behaviour.
 
@@ -6,7 +6,7 @@ A full VB.NET Windows Forms slave application with configurable listener behavio
 
 Open the project in Visual Studio and configure the listener settings in the UI.
 
-Replace the license placeholders before connecting to a PLCcom Modbus endpoint.
+Enter your license user name and serial before connecting to a PLCcom Modbus endpoint, or leave both fields blank to run for 15 minutes during a debug session.
 
 ## Run
 

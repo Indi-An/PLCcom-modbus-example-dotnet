@@ -1,4 +1,4 @@
-﻿# 11 Simple Master TCP
+# 11 Simple Master TCP
 
 Connects to a Modbus TCP slave, writes a small group of holding registers, reads the same area back, and prints the result.
 
@@ -6,7 +6,7 @@ Connects to a Modbus TCP slave, writes a small group of holding registers, reads
 
 Start `12_Simple_Slave_TCP` first, or point the host and port in `Program.cs` to another Modbus TCP slave.
 
-Replace the license placeholders before connecting to a PLCcom Modbus endpoint.
+Enter your license user name and serial before connecting to a PLCcom Modbus endpoint, or leave both fields blank to run for 15 minutes during a debug session.
 
 ## Run
 

@@ -64,8 +64,8 @@ namespace PLCComMB_Master_Example_CSharp
                 InitializeCertificateAlert();
 
 #if TESTAPP
-                txtUser.Text = "demo";
-                txtSerial.Text = "demo";
+                txtUser.Text = ""; // blank: the library runs for 15 minutes during a debug session
+                txtSerial.Text = ""; // free trial license: https://www.indi-an.com/en/plccom/modbus/modbus-download/
 #endif
 
                 //fill combobox with enum values

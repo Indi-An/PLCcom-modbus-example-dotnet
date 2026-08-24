@@ -72,7 +72,7 @@ If the required package is not yet available on nuget.org, add the package sourc
 - Windows 10/11 or Windows Server for the full Windows Forms applications
 - .NET 10 SDK
 - Visual Studio 2022 or newer, Visual Studio 2026 recommended
-- A valid PLCcom Modbus license user name and serial number
+- A PLCcom Modbus license user name and serial number, or blank fields for a first look (see below)
 - A Modbus device, simulator, or one of the included slave workshops
 
 ## 🚀 Getting Started
@@ -80,7 +80,7 @@ If the required package is not yet available on nuget.org, add the package sourc
 1. Clone the repository.
 2. Open `PLCcom_Modbus_Examples.sln` in Visual Studio.
 3. Open the workshop README for the sample you want to run.
-4. Replace the visible license placeholders in the source code or application settings.
+4. Enter your license user name and serial in the source code or application settings, or leave both blank for a first look.
 5. Start the matching slave first, then start the master.
 
 Command-line build after the matching package is available:
@@ -141,6 +141,14 @@ All example sources in this repository are released under the **MIT License**. Y
 **PLCcom Library License**
 
 The **PLCcom Modbus** library itself is proprietary software and is not part of the MIT license. To use the SDK in your own applications, you need a valid PLCcom Modbus license and must accept the applicable EULA.
+
+**Trying it out without a license**
+
+If you leave the user name and serial fields blank, the library runs for 15 minutes during a debug session. That is enough to bring up a connection and try out the functional scope before you request a license.
+
+**Test License**
+
+For uninterrupted work you need a license. A free trial license valid for 14 days is available directly from the PLCcom for Modbus [download website](https://www.indi-an.com/en/plccom/modbus/modbus-download/) — no time limit per session, no debug session required.
 
 ## ⚠️ Safety Notice
 

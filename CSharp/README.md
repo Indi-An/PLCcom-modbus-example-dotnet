@@ -1,8 +1,8 @@
-﻿# C# Workshops
+# C# Workshops
 
 This is the C# learning path for PLCcom Modbus. Start small, keep the telegram flow visible, and only add security, certificates, and full UI tooling once the plain master/slave conversation feels familiar.
 
-The examples are written as workshop code, not as hidden framework magic. Important settings are deliberately close to the code that uses them: host, port, unit id, license placeholders, register addresses, TLS options, and PKI paths.
+The examples are written as workshop code, not as hidden framework magic. Important settings are deliberately close to the code that uses them: host, port, unit id, license data, register addresses, TLS options, and PKI paths.
 
 ## Chapters
 
