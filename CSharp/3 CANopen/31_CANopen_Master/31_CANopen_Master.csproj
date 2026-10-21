@@ -20,7 +20,7 @@
     <DebugType>pdbonly</DebugType>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="PLCcomModbus" Version="9.2.*" />
+    <PackageReference Include="PLCcomModbus" Version="9.4.*" />
   </ItemGroup>
 </Project>
 

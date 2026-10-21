@@ -125,17 +125,18 @@ Namespace PLCcomModbus.Workshops.SecureTcp.SecureTcpSlave
             '   * trusted/certs contains remote client certificates that are
             '     trusted directly. They are accepted only while their validity
             '     period is still OK.
-            '   * issuers/certs contains CA or issuer certificates. If a remote
-            '     client certificate chains to one of these issuers and the chain
-            '     is valid, PLCcom copies the leaf certificate to trusted/certs
-            '     and accepts the connection.
+            '   * issuer/certs contains CA certificates. If one of them has signed
+            '     the remote client certificate and both are valid, PLCcom accepts
+            '     the connection. The certificate is stored nowhere: once the CA
+            '     is removed, its certificates are rejected again.
             '   * rejected/certs receives unknown, expired or otherwise invalid
             '     remote client certificates. The connection is rejected so an
             '     operator can review and move trust material.
             '
             ' Workshop-only override:
-            ' Assigning RemoteCertificateValidator disables that automatic
-            ' certificate-level PKI decision. This intentionally unsafe validator
+            ' Assigning RemoteCertificateValidator switches that PKI processing
+            ' off: the trust folders are then neither read nor written, and the
+            ' validator decides alone. This intentionally unsafe validator
             ' returns True for every client certificate so the user can see how
             ' the validator hook works without preparing trusted certificates.
             options.RemoteCertificateValidator = New UnsafeAcceptAllCertificateValidator("SecureTCP client")
@@ -155,7 +156,7 @@ Namespace PLCcomModbus.Workshops.SecureTcp.SecureTcpSlave
             Console.WriteLine("  own/certs      : {0}", pkiStore.OwnCertificatesPath)
             Console.WriteLine("  own/private    : {0}", pkiStore.OwnPrivatePath)
             Console.WriteLine("  trusted/certs  : {0}", pkiStore.TrustedCertificatesPath)
-            Console.WriteLine("  issuers/certs  : {0}", pkiStore.IssuerCertificatesPath)
+            Console.WriteLine("  issuer/certs   : {0}", pkiStore.IssuerCertificatesPath)
             Console.WriteLine("  rejected/certs : {0}", pkiStore.RejectedCertificatesPath)
             Console.WriteLine()
         End Sub

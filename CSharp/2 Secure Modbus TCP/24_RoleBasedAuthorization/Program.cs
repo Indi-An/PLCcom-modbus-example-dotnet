@@ -288,7 +288,8 @@ namespace PLCcomModbus.Workshops.SecureTcp.RoleBasedAuthorization
 
                     if (server)
                     {
-                        // For server certs, add identity values required by TLS host validation.
+                        // Server identity values, the way production certificates carry them. The default
+                        // validator does not check host names; TargetHostName is a hint for custom validators.
                         SubjectAlternativeNameBuilder sanBuilder = new SubjectAlternativeNameBuilder();
                         sanBuilder.AddDnsName(CertificateHostName);
                         sanBuilder.AddIpAddress(IPAddress.Parse(ConnectHost));

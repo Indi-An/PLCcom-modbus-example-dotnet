@@ -254,7 +254,8 @@ Namespace PLCcomModbus.Workshops.SecureTcp.RoleBasedAuthorization
                         False))
 
                     If server Then
-                        ' Server identity values are used by hostname validation at connect time.
+                        ' Server identity values, the way production certificates carry them. The default
+                        ' validator does not check host names; TargetHostName is a hint for custom validators.
                         Dim sanBuilder As New SubjectAlternativeNameBuilder()
                         sanBuilder.AddDnsName(CertificateHostName)
                         sanBuilder.AddIpAddress(IPAddress.Parse(ConnectHost))

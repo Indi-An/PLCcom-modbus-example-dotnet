@@ -174,7 +174,7 @@ Friend NotInheritable Class CertificateManagerForm
         buttonOpenPki = CreateFooterButton(R("CertificateManager_ButtonOpenPki_Text", "PKI"), 94, AddressOf buttonOpenPki_Click, CreateOpenPkiImage(), R("CertificateManager_ButtonOpenPki_ToolTip", "Open the SecureTCP PKI folder."))
         buttonRefresh = CreateFooterButton(R("CertificateManager_ButtonRefresh_Text", "Refresh"), 172, AddressOf buttonRefresh_Click, CreateRefreshImage(), R("CertificateManager_ButtonRefresh_ToolTip", "Refresh the certificate list."))
         buttonTrust = CreateFooterButton(R("CertificateManager_ButtonTrust_Text", "Trust"), 440, AddressOf buttonTrust_Click, CreateTrustImage(), R("CertificateManager_ButtonTrust_ToolTip", "Move the selected rejected certificate to trusted."))
-        buttonTrustIssuer = CreateFooterButton(R("CertificateManager_ButtonIssuer_Text", "Issuer"), 518, AddressOf buttonTrustIssuer_Click, CreateIssuerImage(), R("CertificateManager_ButtonIssuer_ToolTip", "Move the selected certificate to issuers."))
+        buttonTrustIssuer = CreateFooterButton(R("CertificateManager_ButtonIssuer_Text", "Issuer"), 518, AddressOf buttonTrustIssuer_Click, CreateIssuerImage(), R("CertificateManager_ButtonIssuer_ToolTip", "Move the selected certificate to issuer."))
         buttonReject = CreateFooterButton(R("CertificateManager_ButtonReject_Text", "Reject"), 596, AddressOf buttonReject_Click, CreateRejectImage(), R("CertificateManager_ButtonReject_ToolTip", "Move the selected certificate to rejected."))
         buttonDelete = CreateFooterButton(R("CertificateManager_ButtonDelete_Text", "Delete"), 674, AddressOf buttonDelete_Click, CreateDeleteImage(), R("CertificateManager_ButtonDelete_ToolTip", "Delete the selected certificate file."))
         buttonClose = CreateFooterButton(R("CertificateManager_ButtonClose_Text", "close" & vbCrLf & "window"), 896, AddressOf buttonClose_Click, GetCloseButtonImage(), R("CertificateManager_ButtonClose_ToolTip", "Close this window."))
@@ -492,12 +492,25 @@ Friend NotInheritable Class CertificateManagerForm
         Return count
     End Function
 
+    ' Only CA certificates belong into issuer/certs (PLCcom PKI rule); the default validator ignores other
+    ' certificates there.
+    Private Shared Function IsCertificateAuthority(certificate As X509Certificate2) As Boolean
+        For Each extension As X509Extension In certificate.Extensions
+            Dim basicConstraints As X509BasicConstraintsExtension = TryCast(extension, X509BasicConstraintsExtension)
+            If basicConstraints IsNot Nothing Then
+                Return basicConstraints.CertificateAuthority
+            End If
+        Next
+
+        Return False
+    End Function
+
     Private Sub UpdateSelectionState()
         Dim entry As CertificateEntry = SelectedEntry
         Dim hasCertificate As Boolean = entry IsNot Nothing AndAlso entry.Certificate IsNot Nothing
         Dim canTrust As Boolean = hasCertificate AndAlso entry.StoreName = "Rejected"
         Dim canReject As Boolean = hasCertificate AndAlso entry.StoreName <> "Rejected" AndAlso entry.StoreName <> "Own"
-        Dim canTrustIssuer As Boolean = hasCertificate AndAlso entry.StoreName <> "Issuers" AndAlso entry.StoreName <> "Own"
+        Dim canTrustIssuer As Boolean = hasCertificate AndAlso entry.StoreName <> "Issuers" AndAlso entry.StoreName <> "Own" AndAlso IsCertificateAuthority(entry.Certificate)
         buttonTrust.Enabled = canTrust
         buttonTrustIssuer.Enabled = canTrustIssuer
         buttonReject.Enabled = canReject
@@ -572,7 +585,7 @@ Friend NotInheritable Class CertificateManagerForm
         Dim entry As CertificateEntry = SelectedEntry
         Dim hasCertificate As Boolean = entry IsNot Nothing AndAlso entry.Certificate IsNot Nothing
         menuTrust.Enabled = hasCertificate AndAlso entry.StoreName = "Rejected"
-        menuTrustIssuer.Enabled = hasCertificate AndAlso entry.StoreName <> "Issuers" AndAlso entry.StoreName <> "Own"
+        menuTrustIssuer.Enabled = hasCertificate AndAlso entry.StoreName <> "Issuers" AndAlso entry.StoreName <> "Own" AndAlso IsCertificateAuthority(entry.Certificate)
         menuReject.Enabled = hasCertificate AndAlso entry.StoreName <> "Rejected" AndAlso entry.StoreName <> "Own"
         menuDelete.Enabled = entry IsNot Nothing
         menuCopyThumbprint.Enabled = hasCertificate

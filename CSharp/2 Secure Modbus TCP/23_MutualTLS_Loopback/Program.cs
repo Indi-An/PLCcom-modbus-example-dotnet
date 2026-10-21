@@ -256,9 +256,9 @@ namespace PLCcomModbus.Workshops.SecureTcp.MutualTLSLoopback
 
                     if (server)
                     {
-                        // The master validates the slave certificate against
-                        // TargetHostName. For loopback testing, the certificate
-                        // therefore contains both localhost and 127.0.0.1.
+                        // The SAN entries name the endpoint the way production
+                        // certificates do. The default validator does not check
+                        // host names; TargetHostName is a hint for custom validators.
                         SubjectAlternativeNameBuilder sanBuilder = new SubjectAlternativeNameBuilder();
                         sanBuilder.AddDnsName(CertificateHostName);
                         sanBuilder.AddIpAddress(IPAddress.Parse(ConnectHost));

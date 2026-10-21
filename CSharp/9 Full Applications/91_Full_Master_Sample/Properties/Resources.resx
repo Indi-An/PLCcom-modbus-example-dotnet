@@ -508,7 +508,7 @@ With the product ‘PLCcomModbus.Core’ and also with the example code, the use
     <value>Move the selected rejected certificate to trusted.</value>
   </data>
   <data name="CertificateManager_ButtonIssuer_ToolTip" xml:space="preserve">
-    <value>Move the selected certificate to issuers.</value>
+    <value>Move the selected certificate to issuer.</value>
   </data>
   <data name="CertificateManager_ButtonReject_ToolTip" xml:space="preserve">
     <value>Move the selected certificate to rejected.</value>

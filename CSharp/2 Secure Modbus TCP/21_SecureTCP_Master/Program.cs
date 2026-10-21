@@ -118,7 +118,7 @@ namespace PLCcomModbus.Workshops.SecureTcp.SecureTcpMaster
         private static SecureModbusTcpOptions CreateSecureTcpOptions()
         {
             // The PKI store follows the OPC UA-style folder layout: own,
-            // trusted, issuers and rejected. The structure is created on first access.
+            // trusted, issuer and rejected. The structure is created on first access.
             SecureModbusPkiStore pkiStore = new SecureModbusPkiStore(@".\pki\securetcp-master");
             pkiStore.EnsureDirectories();
             pkiStore.CertificateStored += OnCertificateStored;
@@ -148,24 +148,25 @@ namespace PLCcomModbus.Workshops.SecureTcp.SecureTcpMaster
             //   * trusted/certs contains remote leaf certificates that are
             //     trusted directly. They are accepted only while their validity
             //     period is still OK.
-            //   * issuers/certs contains CA or issuer certificates. If a remote
-            //     certificate chains to one of these issuers and the chain is
-            //     valid, PLCcom copies the leaf certificate to trusted/certs and
-            //     accepts the connection.
-            //   * rejected/certs receives unknown, expired, host-name-mismatched
-            //     or otherwise invalid remote certificates. The connection is
+            //   * issuer/certs contains CA certificates. If one of them has signed
+            //     the remote certificate and both are valid, PLCcom accepts the
+            //     connection. The certificate is stored nowhere: once the CA is
+            //     removed, its certificates are rejected again.
+            //   * rejected/certs receives unknown, expired or otherwise
+            //     invalid remote certificates. The connection is
             //     rejected so an operator can review and move trust material.
             //
             // Workshop-only override:
-            // Assigning RemoteCertificateValidator disables that automatic
-            // certificate-level PKI decision. This intentionally unsafe validator
+            // Assigning RemoteCertificateValidator switches that PKI processing
+            // off: the trust folders are then neither read nor written, and the
+            // validator decides alone. This intentionally unsafe validator
             // returns true for every server certificate so the user can see how
             // the validator hook works without preparing trusted certificates.
             options.RemoteCertificateValidator = new UnsafeAcceptAllCertificateValidator("SecureTCP server");
 
-            // Expected target host name is used by TLS endpoint checks.
-            // Host-name validation compares the remote certificate against
-            // this expected name. Use the real DNS name or IP identity in production.
+            // The default validator does not check host names; the PKI folders
+            // alone decide. TargetHostName is passed to a custom validator as a
+            // hint, for example to compare it with the certificate's DNS name.
             options.TargetHostName = ExpectedCertificateHostName;
 
             // Auto mode allows modern/default protocols while still enabling overrides.
@@ -184,7 +185,7 @@ namespace PLCcomModbus.Workshops.SecureTcp.SecureTcpMaster
             Console.WriteLine("  own/certs      : {0}", pkiStore.OwnCertificatesPath);
             Console.WriteLine("  own/private    : {0}", pkiStore.OwnPrivatePath);
             Console.WriteLine("  trusted/certs  : {0}", pkiStore.TrustedCertificatesPath);
-            Console.WriteLine("  issuers/certs  : {0}", pkiStore.IssuerCertificatesPath);
+            Console.WriteLine("  issuer/certs   : {0}", pkiStore.IssuerCertificatesPath);
             Console.WriteLine("  rejected/certs : {0}", pkiStore.RejectedCertificatesPath);
             Console.WriteLine();
         }

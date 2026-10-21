@@ -179,7 +179,7 @@ namespace PLCComMB_Master_Example_CSharp
             buttonOpenPki = CreateFooterButton(R("CertificateManager_ButtonOpenPki_Text", "PKI"), 94, buttonOpenPki_Click, CreateOpenPkiImage(), R("CertificateManager_ButtonOpenPki_ToolTip", "Open the SecureTCP PKI folder."));
             buttonRefresh = CreateFooterButton(R("CertificateManager_ButtonRefresh_Text", "Refresh"), 172, buttonRefresh_Click, CreateRefreshImage(), R("CertificateManager_ButtonRefresh_ToolTip", "Refresh the certificate list."));
             buttonTrust = CreateFooterButton(R("CertificateManager_ButtonTrust_Text", "Trust"), 440, buttonTrust_Click, CreateTrustImage(), R("CertificateManager_ButtonTrust_ToolTip", "Move the selected rejected certificate to trusted."));
-            buttonTrustIssuer = CreateFooterButton(R("CertificateManager_ButtonIssuer_Text", "Issuer"), 518, buttonTrustIssuer_Click, CreateIssuerImage(), R("CertificateManager_ButtonIssuer_ToolTip", "Move the selected certificate to issuers."));
+            buttonTrustIssuer = CreateFooterButton(R("CertificateManager_ButtonIssuer_Text", "Issuer"), 518, buttonTrustIssuer_Click, CreateIssuerImage(), R("CertificateManager_ButtonIssuer_ToolTip", "Move the selected certificate to issuer."));
             buttonReject = CreateFooterButton(R("CertificateManager_ButtonReject_Text", "Reject"), 596, buttonReject_Click, CreateRejectImage(), R("CertificateManager_ButtonReject_ToolTip", "Move the selected certificate to rejected."));
             buttonDelete = CreateFooterButton(R("CertificateManager_ButtonDelete_Text", "Delete"), 674, buttonDelete_Click, CreateDeleteImage(), R("CertificateManager_ButtonDelete_ToolTip", "Delete the selected certificate file."));
             buttonClose = CreateFooterButton(R("CertificateManager_ButtonClose_Text", "close\r\nwindow"), 896, buttonClose_Click, GetCloseButtonImage(), R("CertificateManager_ButtonClose_ToolTip", "Close this window."));
@@ -551,13 +551,27 @@ namespace PLCComMB_Master_Example_CSharp
             return count;
         }
 
+        // Only CA certificates belong into issuer/certs (PLCcom PKI rule); the default validator ignores other
+        // certificates there.
+        private static bool IsCertificateAuthority(X509Certificate2 certificate)
+        {
+            foreach (X509Extension extension in certificate.Extensions)
+            {
+                X509BasicConstraintsExtension basicConstraints = extension as X509BasicConstraintsExtension;
+                if (basicConstraints != null)
+                    return basicConstraints.CertificateAuthority;
+            }
+
+            return false;
+        }
+
         private void UpdateSelectionState()
         {
             CertificateEntry entry = SelectedEntry;
             bool hasCertificate = entry != null && entry.Certificate != null;
             bool canTrust = hasCertificate && entry.StoreName == "Rejected";
             bool canReject = hasCertificate && entry.StoreName != "Rejected" && entry.StoreName != "Own";
-            bool canTrustIssuer = hasCertificate && entry.StoreName != "Issuers" && entry.StoreName != "Own";
+            bool canTrustIssuer = hasCertificate && entry.StoreName != "Issuers" && entry.StoreName != "Own" && IsCertificateAuthority(entry.Certificate);
             buttonTrust.Enabled = canTrust;
             buttonTrustIssuer.Enabled = canTrustIssuer;
             buttonReject.Enabled = canReject;
@@ -637,7 +651,7 @@ namespace PLCComMB_Master_Example_CSharp
             CertificateEntry entry = SelectedEntry;
             bool hasCertificate = entry != null && entry.Certificate != null;
             menuTrust.Enabled = hasCertificate && entry.StoreName == "Rejected";
-            menuTrustIssuer.Enabled = hasCertificate && entry.StoreName != "Issuers" && entry.StoreName != "Own";
+            menuTrustIssuer.Enabled = hasCertificate && entry.StoreName != "Issuers" && entry.StoreName != "Own" && IsCertificateAuthority(entry.Certificate);
             menuReject.Enabled = hasCertificate && entry.StoreName != "Rejected" && entry.StoreName != "Own";
             menuDelete.Enabled = entry != null;
             menuCopyThumbprint.Enabled = hasCertificate;
